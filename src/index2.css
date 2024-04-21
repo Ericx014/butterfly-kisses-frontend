@@ -23,13 +23,17 @@ button {
 	-webkit-text-fill-color: black;
 }
 
-input, select, textarea {
+input[type="checkbox"] {
+	border: 1px solid var(--main-dark-color);
+}
+
+input[type="text"], select, textarea {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 }
 
-input, select, textarea{
+input[type="text"], input[type="number"], select, textarea{
 	padding: 5px;
 	color: black;
 	background-color: white;
@@ -120,7 +124,7 @@ label {
 	transition: all, 100ms ease-in-out;
 	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
-	margin-bottom: 5vh;
+	margin-bottom: 10vh;
 	/* position: relative; */
 }
 
@@ -208,6 +212,7 @@ label {
 	letter-spacing: 1px;
 	font-size: 23px;
 	text-transform: uppercase;
+	font-weight: 600;
 }
 
 .card-container > .sub-heading {
@@ -270,4 +275,50 @@ label {
 	.card-container > .sub-heading-2 {
 		font-size: 16px;
 	}
+}
+
+a.link {
+	text-decoration: underline;
+	transition: color 0.1s ease-in;
+}
+
+a.link:hover {
+	color: blue;
+}
+
+/* Modal */
+/* The Modal (background) */
+.modal {
+  position: fixed;
+  z-index: 1; 
+	top: 0;
+  margin: 10 auto;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+	transition: color 0.2s ease-in-out;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
