@@ -52,7 +52,7 @@ label {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .input-container > input,
@@ -251,4 +251,23 @@ label {
     width: 90vw;
 		max-width: 400px;
   }
+
+	.card-container > p {
+		font-family: 'Times New Roman', Times, serif;
+		text-align: center;
+	}
+
+	.card-container > .heading {
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+
+	.card-container > .sub-heading {
+		font-size: 18px;
+		text-transform: capitalize;
+	}
+
+	.card-container > .sub-heading-2 {
+		font-size: 16px;
+	}
 }
