@@ -8,13 +8,15 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	/* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+	font-family: 'Times New Roman', Times, serif;
+	letter-spacing: 1px;
 	font-size: 16px;
 }
 
 body {
 	height: fit-content;
-  background-image: linear-gradient(180deg, var(--main-dark-color) 0%, var(--main-light-color) 100%);
+  background-image: linear-gradient(180deg, var(--main-dark-color) 0%, var(--main-light-color) 85%);
 }
 
 button {
@@ -109,7 +111,7 @@ label {
 .container {
 	background-color: #fff;
 	width: 50vw;
-	margin: 5vh auto;
+	margin: 0 auto;
 	padding: 40px;
 	display: flex;
 	flex-direction: column;
@@ -118,6 +120,8 @@ label {
 	transition: all, 100ms ease-in-out;
 	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
+	margin-bottom: 5vh;
+	/* position: relative; */
 }
 
 /* Button bounce animation */
@@ -167,5 +171,84 @@ label {
 		min-height: 30px;
     width: 50vw;
     max-width: 80px;
+  }
+}
+
+.card-container {
+	margin: 5vh auto;
+	background-color: white;
+	max-width: 450px; 
+	width: 50vw;
+	height: fit-content;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	justify-content: center;
+	gap:5px;
+}
+
+.logo {
+	width: 25%;
+	margin-bottom: 10px;
+}
+
+.logo-container {
+	display: flex;
+	justify-content: center;
+}
+
+.card-container > p {
+	font-family: 'Times New Roman', Times, serif;
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+.card-container > .heading {
+	letter-spacing: 1px;
+	font-size: 23px;
+	text-transform: uppercase;
+}
+
+.card-container > .sub-heading {
+	font-size: 20px;
+	text-transform: capitalize;
+}
+
+.card-container > .sub-heading-2 {
+	font-size: 16px;
+}
+
+/* For tablets */
+@media (max-width: 768px) {
+  .card-container {
+    width: 70vw;
+  }
+
+	.card-container > p {
+		font-family: 'Times New Roman', Times, serif;
+		text-align: center;
+	}
+
+	.card-container > .heading {
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+
+	.card-container > .sub-heading {
+		font-size: 18px;
+		text-transform: capitalize;
+	}
+
+	.card-container > .sub-heading-2 {
+		font-size: 16px;
+	}
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  .card-container {
+    width: 90vw;
+		max-width: 400px;
   }
 }

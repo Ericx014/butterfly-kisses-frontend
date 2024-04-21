@@ -29,55 +29,80 @@ const Form = () => {
     ...new Set(sessions.map((singleSession) => singleSession.day)),
   ];
 
-  const handleRemarksChange = (e) => {
-    setRemarks(e.target.value);
-  };
-
   const addParticipant = (event) => {
     event.preventDefault();
     setClickedAnimation(true);
     setTimeout(() => setClickedAnimation(false), 2000);
 
-		const selectedSession = sessions.find((s) => s.id === session);
-    if (
-      selectedSession.participants.length >= selectedSession.maxParticipants
-    ) {
-      alert("This session is full. Please select a different session.");
-      return;
-    }
+		if (!name && !contactNo && !email && !gender && !age && !day && !session) {
+    alert("Please fill all required the fields.");
+    return;
+  	}  
 
-    const participantObject = {
-      name: name,
-			studentId: studentId,
-      contactNo: contactNo,
-      email: email,
-      gender: gender,
-      age: age,
-      day: day,
-      session: session,
-      remarks: remarks,
-      others: others,
-    };
+		if (!name) {
+      alert("Name field is required");
 
-    participantService.create(participantObject).then(() => {
-			sessionService.getAll().then((allSessions) => {
-        setSessions(allSessions);
-      });
-			
-			console.log("Session found", selectedSession.maxParticipants);
-			console.log("Participants:", (selectedSession.participants.length + 1), "out of", selectedSession.maxParticipants);
+    } else if (!contactNo) {
+      alert("Contact number is required");
 
-      setName("");
-			setStudentId("");
-      setContactNo("");
-      setEmail("");
-      setGender("");
-      setAge("");
-      setDay("");
-      setSession("");
-      setRemarks("");
-      setOthers("");
-    });
+    } else if (!email) {
+      alert("Email address is required");
+
+    } else if (!gender) {
+      alert("Gender field is required");
+
+    } else if (!age) {
+      alert("Age field is required");
+
+    } else if (!day) {
+      alert("Please select a day");
+
+    } else if (!session) {
+      alert("Please select a session");
+
+    } else {
+			const selectedSession = sessions.find((s) => s.id === session);
+			if (
+				selectedSession.participants.length >= selectedSession.maxParticipants
+			) {
+				alert("This session is full. Please select a different session.");
+				return;
+			}
+			const participantObject = {
+				name: name,
+				studentId: studentId,
+				contactNo: contactNo,
+				email: email,
+				gender: gender,
+				age: age,
+				day: day,
+				session: session,
+				remarks: remarks,
+				others: others,
+			};
+			participantService.create(participantObject).then(() => {
+				sessionService.getAll().then((allSessions) => {
+					setSessions(allSessions);
+				});
+				
+				console.log("Session found", selectedSession.maxParticipants);
+				console.log("Participants:", (selectedSession.participants.length + 1), "out of", selectedSession.maxParticipants);
+				console.log("Add participant", participantObject);
+
+				alert(`Registration successful. Please remember the details of registered session: \n${participantObject.day}\n${selectedSession.session}`);
+
+				setName("");
+				setStudentId("");
+				setContactNo("");
+				setEmail("");
+				setGender("");
+				setAge("");
+				setDay("");
+				setSession("");
+				setRemarks("");
+				setOthers("");
+			});
+		}
   };
 
   return (
@@ -91,16 +116,17 @@ const Form = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ali bin Abu"
+            required
           />
         </div>
         <div className="input-container">
-          <label htmlFor="name">Student ID</label>
+          <label htmlFor="name">Student ID*</label>
           <input
             type="text"
             id="studentId"
             value={studentId}
             onChange={(e) => setStudentId(e.target.value)}
-            placeholder="For TARUMT students only"
+            placeholder="24WKD07303"
           />
         </div>
         <div className="input-container">
@@ -111,6 +137,7 @@ const Form = () => {
             value={contactNo}
             onChange={(e) => setContactNo(e.target.value)}
             placeholder="01144598329"
+            required
           />
         </div>
         <div className="input-container">
@@ -121,6 +148,7 @@ const Form = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="alibinabu@gmail.com"
+            required
           />
         </div>
         <div className="input-container">
@@ -147,6 +175,7 @@ const Form = () => {
             value={age}
             onChange={(e) => setAge(e.target.value)}
             placeholder="21"
+						required
           />
         </div>
         <div className="input-container">
@@ -190,52 +219,6 @@ const Form = () => {
             )}
           </select>
         </div>
-        <div className="input-container">
-          <label
-            htmlFor="remarks"
-            value={remarks}
-            onChange={(e) => setRemarks(e.target.value)}
-          >
-            Remarks
-          </label>
-          <select
-            name="remarks"
-            id="remarks"
-            value={remarks}
-            onChange={handleRemarksChange}
-            className={remarks == "" ? "placeholder" : ""}
-          >
-            <option value="" className="placeholder">
-              Select an option
-            </option>
-            <option value="option 1">Option 1</option>
-            <option value="option 2">Option 2</option>
-            <option value="others">Others</option>
-          </select>
-        </div>
-        {remarks !== "others" && (
-          <div className="input-container">
-            <label htmlFor="others">Others</label>
-            <textarea
-              type="text"
-              id="others"
-              disabled
-              placeholder="Select other remarks to enter"
-            />
-          </div>
-        )}
-        {remarks === "others" && (
-          <div className="input-container">
-            <label htmlFor="others">Others</label>
-            <textarea
-              type="text"
-              id="others"
-              value={others}
-              onChange={(e) => setOthers(e.target.value)}
-              placeholder="Enter other remarks here"
-            />
-          </div>
-        )}
         <div className="button-container">
           <button
             className={clickedAnimation ? "form-btn button-bounce" : "form-btn"}
