@@ -1,10 +1,11 @@
 import {useState, useEffect} from "react";
 import sessionService from "../Services/sessions";
 import participantService from "../Services/participants";
+import Modal from "./Modal";
 
 const Form = () => {
   const [clickedAnimation, setClickedAnimation] = useState(false);
-	const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [name, setName] = useState("");
   const [studentId, setStudentId] = useState("");
@@ -106,23 +107,15 @@ const Form = () => {
     }
   };
 
-	const handleLinkClick = (event) => {
+  const handleLinkClick = (event) => {
     event.preventDefault();
     setModalVisible(!modalVisible);
   };
 
   return (
     <>
-      {modalVisible && (
-        <div className="modal">
-          <div className="modal-content">
-            <span class="close" onClick={handleLinkClick}>
-              &times;
-            </span>
-            <p>Some text in the Modal..</p>
-          </div>
-        </div>
-      )}
+      {modalVisible && <Modal handleLinkClick={handleLinkClick} />}
+			
       <form onSubmit={addParticipant}>
         <div className="container">
           <div className="input-container">
@@ -239,6 +232,7 @@ const Form = () => {
           <div>
             <input type="checkbox" id="tnc" name="tnc" />
             <label htmlFor="tnc">
+              {" "}
               I have read and agreed to the{" "}
               <a className="link" onClick={handleLinkClick}>
                 terms and condition
