@@ -15,6 +15,7 @@
 }
 
 body {
+	min-height: 100vh;
   height: fit-content;
   background-image: linear-gradient(
     180deg,
@@ -32,6 +33,7 @@ input[type="checkbox"] {
 }
 
 input[type="text"],
+input[type="password"],
 select,
 textarea {
   -webkit-appearance: none;
@@ -40,6 +42,7 @@ textarea {
 }
 
 input[type="text"],
+input[type="password"],
 input[type="number"],
 select,
 textarea {
@@ -88,7 +91,7 @@ option.placeholder {
   margin-top: 10px;
 }
 
-.form-btn {
+.form-btn, .login-btn {
   width: 12vw;
   height: 4vw;
   background-color: #fff;
@@ -99,7 +102,8 @@ option.placeholder {
   max-height: 40px;
 }
 
-.form-btn::before {
+.form-btn::before,
+.login-btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -112,12 +116,15 @@ option.placeholder {
   transition: top, left, right, bottom, 100ms ease-in-out;
 }
 
-.form-btn:hover {
+.form-btn:hover,
+.login-btn:hover {
   border: 1px solid var(--main-dark-color);
 }
 
 .form-btn:hover::before,
-.form-btn:focus::before {
+.form-btn:focus::before,
+.login-btn:hover::before,
+.login-btn:focus::before {
   border: 2px solid var(--main-dark-color);
   border-radius: 16px;
   top: calc(var(--border-size) * -3);
@@ -181,9 +188,11 @@ option.placeholder {
     width: 70vw;
   }
 
-  .form-btn {
-    width: 30vw;
-    max-width: 100px;
+  .form-btn, .login-btn {
+    min-width: 30px;
+    min-height: 30px;
+    width: 50vw;
+    max-width: 80px;
   }
 }
 
@@ -198,7 +207,7 @@ option.placeholder {
     max-width: 400px;
   }
 
-  .form-btn {
+  .form-btn, .login-btn {
     min-width: 30px;
     min-height: 30px;
     width: 50vw;
@@ -218,6 +227,7 @@ option.placeholder {
   border-radius: 10px;
   justify-content: center;
   gap: 5px;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -415,5 +425,152 @@ ol > li {
 }
 
 footer {
-  background-color: var(--main-dark-color);
+  background-color: #e4b1a5;
+	padding: 20px 0;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+	display: flex;
+	justify-content: center;
+	gap: 60px;
+	align-items: center;
+}
+
+img.tarumt-logo {
+	width: 150px;
+	height: 50px;
+}
+
+img.fcci-logo {
+	width: 105px;
+	height: 70px;
+}
+
+:root {
+  --main-dark-color: #f4b8aa;
+	--main-color: #fbe2ca;
+  --main-light-color: #fdedd3;
+}
+
+table {
+	border-collapse: collapse;
+	border: 2px solid rgb(105, 104, 104);
+	width: 1300px;
+	min-width: 1300px;
+	background-color: white;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+	font-size: 15px;
+	overflow-x: auto;
+}
+
+thead,
+tfoot {
+	background-color: rgb(105, 104, 104);
+	color: white;
+}
+
+.table-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 40px;
+	overflow-x: auto;
+	padding: 40px 20px;
+	padding-top: 20px;
+	margin: 20px;
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 4px 8px;
+	letter-spacing: 0;
+}
+
+.time-cell {
+	width: 170px;
+}
+
+.session-cell {
+	width: 320px;
+}
+
+.name-cell {
+	width: 250px;
+}
+
+section.table-section  {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: fit-content;
+}
+
+.login-container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	justify-content: center;
+}
+
+.login-form {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+	border-radius: 20px;
+	gap: 20px;
+	justify-content: center;
+	height: 320px;
+	width: 320px;
+	position: relative;
+	top: 100px;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+	display: flex;
+	justify-content: center;
+}
+
+.login-header > h3 {
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.navbar {
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+	width: 30px;
+}
+
+.navbar-label {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 20px;
+}
+
+.navbar-btn-container {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+.navbar-btn {
+	background-color: white;
+	border: none;
+	transition: all ease 0.2s;
+}
+
+.navbar-btn:hover {
+	scale: 1.1;
 }

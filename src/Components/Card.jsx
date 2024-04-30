@@ -1,6 +1,6 @@
 import image from "../img/transparent-logo.png";
 
-const Card = () => {
+const Card = ({activity, days, time, location}) => {
   return (
     <div className="card-container">
       <div className="logo-container">
@@ -8,10 +8,10 @@ const Card = () => {
       </div>
       <p className="heading">Butterfly kisses</p>
       <p className="sub-heading">Goodbye without regret</p>
-			<p className="sub-heading-2">Meditation session</p>
-      <p>7th-9th May 2024</p>
-      <p>10:00a.m - 5:00p.m</p>
-      <p>Concourse</p>
+      <p className="sub-heading-2">{activity}</p>
+      <p>{days}</p>
+      {time && <p>{time}</p>}
+      <p>{location}</p>
       <p>TAR UMT, KL Main Campus</p>
     </div>
   );

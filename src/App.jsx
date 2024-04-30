@@ -1,14 +1,15 @@
-import Card from "./Components/Card";
-import Form from "./Components/Form";
-import Footer from "./Components/Footer";
+import {Route, Routes} from "react-router-dom";
+import Home from "./Components/Home";
+import Admin from "./Components/Admin";
+import Makeup from "./Components/Makeup";
 
 const App = () => {
   return (
-    <div>
-      <Card />
-      <Form />
-			<Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/makeup" element={<Makeup />} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
   );
 };
 

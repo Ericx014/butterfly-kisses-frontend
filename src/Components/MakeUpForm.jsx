@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
-import sessionService from "../Services/sessions";
-import participantService from "../Services/participants";
-import Modal from "./Modal";
+import makeupsessionService from "../Services/makeupsession";
+import makeupparticipantService from "../Services/makeupparticipants";
+import MakeupModal from "./MakeupModal";
 
-const Form = () => {
+const makeUpForm = () => {
   const [clickedAnimation, setClickedAnimation] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [checkBoxTicked, setCheckBoxTicked] = useState(false);
@@ -16,20 +16,17 @@ const Form = () => {
   const [age, setAge] = useState("");
   const [day, setDay] = useState("");
   const [session, setSession] = useState("");
-  const [remarks, setRemarks] = useState("");
-  const [others, setOthers] = useState("");
-
-  const [sessions, setSessions] = useState([]);
+  const [makeupsessions, setMakeupsessions] = useState([]);
 
   useEffect(() => {
-    sessionService.getAll().then((allSessions) => {
-      setSessions(allSessions);
-      console.log("Sessions", allSessions);
+    makeupsessionService.getAll().then((allSessions) => {
+      setMakeupsessions(allSessions);
+      console.log("Makeup Sessions", allSessions);
     });
   }, []);
 
   const uniqueDays = [
-    ...new Set(sessions.map((singleSession) => singleSession.day)),
+    ...new Set(makeupsessions.map((singleSession) => singleSession.day)),
   ];
 
   const addParticipant = (event) => {
@@ -67,7 +64,7 @@ const Form = () => {
       alert("Please agree to the terms and conditions before submitting.");
       return;
     } else {
-      const selectedSession = sessions.find((s) => s.id === session);
+      const selectedSession = makeupsessions.find((s) => s.id === session);
       if (
         selectedSession.participants.length >= selectedSession.maxParticipants
       ) {
@@ -83,12 +80,10 @@ const Form = () => {
         age: age,
         day: day,
         session: session,
-        remarks: remarks,
-        others: others,
       };
-      participantService.create(participantObject).then(() => {
-        sessionService.getAll().then((allSessions) => {
-          setSessions(allSessions);
+      makeupparticipantService.create(participantObject).then(() => {
+        makeupsessionService.getAll().then((allSessions) => {
+          setMakeupsessions(allSessions);
         });
 
         console.log("Session found", selectedSession.maxParticipants);
@@ -123,7 +118,7 @@ const Form = () => {
 
   return (
     <>
-      {modalVisible && <Modal handleLinkClick={handleLinkClick} />}
+      {modalVisible && <MakeupModal handleLinkClick={handleLinkClick} />}
 
       <form onSubmit={addParticipant}>
         <div className="container">
@@ -139,7 +134,9 @@ const Form = () => {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="name">Student ID No. (TAR UMT Students) / Personal IC No. (Public)</label>
+            <label htmlFor="name">
+              Student ID No. (TAR UMT Students) / Personal IC No. (Public)
+            </label>
             <input
               type="text"
               id="studentId"
@@ -177,7 +174,6 @@ const Form = () => {
               id="gender"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
-              className={remarks == "" ? "placeholder" : ""}
             >
               <option value="" className="placeholder">
                 Select an option
@@ -226,15 +222,15 @@ const Form = () => {
               onChange={(e) => setSession(e.target.value)}
             >
               <option value="" className="placeholder">
-                {
-									!day ? "Please select a day to view sessions" : "Select an option"
-								}
+                {!day
+                  ? "Please select a day to view sessions"
+                  : "Select an option"}
               </option>
-              {sessions.map(
+              {makeupsessions.map(
                 (singleSession) =>
                   singleSession.day == day && (
                     <option key={singleSession.id} value={singleSession.id}>
-                      {singleSession.time}{" "}{singleSession.session}
+                      {singleSession.time} {singleSession.session}
                     </option>
                   )
               )}
@@ -273,4 +269,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default makeUpForm;
