@@ -77,6 +77,7 @@ const Table = ({setIsLoggedIn}) => {
                   key={index}
                   uniqueDay={day}
                   sessionToDisplay={matchingSession}
+									view={view}
                 />
               );
             })}
